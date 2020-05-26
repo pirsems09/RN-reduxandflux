@@ -1,22 +1,21 @@
 
 import {
-    PAYROLLS_START,
-    PAYROLLS_SUCCESS,
-    PAYROLLS_FAILD,
+    HOME_START,
+    HOME_SUCCESS,
+    HOME_FAIL,
+    base_url
 } from './types';
 
 import { get } from './Api';
 
-export const payrollsGet = (id, token) => {
+export const homeList = () => {
     return (dispatch) => {
         get(
-            "".data.concat(id),
-            token,
-            0,
+            base_url.concat('home?userId=', USERID.data),
             dispatch,
-            PAYROLLS_START,
-            PAYROLLS_SUCCESS,
-            PAYROLLS_FAILD
+            HOME_START,
+            HOME_SUCCESS,
+            HOME_FAIL
         );
     }
 }

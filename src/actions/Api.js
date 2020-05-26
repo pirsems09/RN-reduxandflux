@@ -1,5 +1,3 @@
-import { AUTHORIZATION } from "./types";
-
 export const post = (
   url,
   token,
@@ -45,43 +43,31 @@ export const post = (
     .then((response) => response.json()).then((responseJson) => {
 
       if (responseJson !== null) {
-
-        if (responseJson.Message == AUTHORIZATION) {
-
-          console.log('token bitmiş', responseJson.AUTHORIZATION);
-
-          httpRequest(url, details, dispatch, start, success, fail, 'post');
-
-        } else {
-
-          console.log('Dönene POST Responsu:: ', responseJson);
-          dispatch({ type: success, payload: responseJson });
-
-        }
+        console.log('Dönene POST Responsu:: ', responseJson);
+        dispatch({ type: success, payload: responseJson });
 
       } else {
-
-        console.log('Post elseye düştü')
-        httpRequest(url, details, dispatch, start, success, fail, 'post');
-
+        console.log('Error.. ', url + 'null değer döndü');
+        dispatch({ type: fail });
       }
 
 
     }).catch(error => {
-      
 
       console.log('Error.. Message catch: Post url', url + error);
       dispatch({ type: fail });
-      //httpRequest(url, details, dispatch, start, success, fail, 'post');
 
     })
 }
 
-export const get = (url, token, contentType,
+export const get = (
+  url,
   dispatch,
   start,
   success,
-  fail) => {
+  fail
+) => {
+
   let _headers = '';
 
   console.log('GET Servisine Çıkılan URL: ', url);
@@ -89,8 +75,8 @@ export const get = (url, token, contentType,
   dispatch({ type: start });
 
   _headers = {
-    'Content-Type': contentType == 1 ? 'application/x-www-form-urlencoded' : 'application/json',
-    'Authorization': 'Bearer '.concat(token)
+    'Content-Type': 'application/json',
+    'apikey': 'okcbf281a2-9529-4bad-be47-d523d4001a24'
   };
 
   fetch(url, {
@@ -100,27 +86,19 @@ export const get = (url, token, contentType,
     .then((response) => response.json()).then((responseJson) => {
 
       if (responseJson !== null) {
-        console.log('Dönene GET Responsu: ', responseJson);
-
-        if (responseJson.Message == AUTHORIZATION) {
-          console.log('token bitmiş', responseJson.AUTHORIZATION);
-          httpRequest(url, null, dispatch, start, success, fail, 'get');
-
-        } else {
-          dispatch({ type: success, payload: responseJson });
-        }
+        console.log('GET servisinden dönen reponse: ', responseJson);
+        dispatch({ type: success, payload: responseJson });
 
       } else {
-        httpRequest(url, null, dispatch, start, success, fail, 'get');
+        console.log('Error.. ', url + 'null değer döndü');
+
+        dispatch({ type: fail });
       }
 
     }).catch(error => {
-      
 
       console.log('Error.. Message catch: get url', url + error);
       dispatch({ type: fail });
-      //httpRequest(details, 'get');
-
     })
 
 }

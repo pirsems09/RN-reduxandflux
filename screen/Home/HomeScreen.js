@@ -1,21 +1,61 @@
 import React from 'react';
 
-import { View, SafeAreaView, Text } from 'react-native';
+import { View } from 'react-native';
 import styles from './sHome';
 import { connect } from 'react-redux';
-//import MapView from 'react-native-maps';
+import TabBar from "@mindinventory/react-native-tab-bar-interaction";
+import AllScreen from '../Kullanilmayan/AllScreen';
+import MapsScreen from '../../screen/Kullanilmayan/MapsScreen';
+import UserListScreen from '../List/ListScreen';
+import ProfileScreen from '../Deneme/ProfileScreen';
+import CreateRent from '../Create/CreateRent';
+
 
 class HomeScreen extends React.Component {
 
+    componentDidMount() {
+        //USERID.data = 'ECA05FEF-9660-4938-9E86-E9F0CBE51C94'
+        // CATEGORYID.data = '1EAF4D0C-9404-431B-BBCA-E9607448A290'
+    }
 
     render() {
+
         return (
 
-            <SafeAreaView>
-                <View>
-                </View>
-            </SafeAreaView>
-        )
+            <TabBar>
+                <TabBar.Item
+                    icon={require('./../../src/assets/icons/store.png')}
+                    selectedIcon={require('./../../src/assets/icons/store.png')}
+                    title="Tab3"
+                    screenBackgroundColor={{ backgroundColor: 'white' }} >
+
+                    <View style={{ ...styles.container, marginBottom: 100 }}>
+                        < CreateRent />
+                    </View>
+
+                </TabBar.Item>
+                <TabBar.Item
+                    icon={require('./../../src/assets/icons/home.png')}
+                    selectedIcon={require('./../../src/assets/icons/home.png')}
+                    title="Tab1"
+                    screenBackgroundColor={{ backgroundColor: 'white' }}>
+
+                    <View style={{ ...styles.container, marginBottom: 100 }}>
+                        <UserListScreen />
+                    </View>
+                </TabBar.Item>
+                <TabBar.Item
+                    icon={require('./../../src/assets/icons/brochure.png')}
+                    selectedIcon={require('./../../src/assets/icons/brochure.png')}
+                    title="Tab3"
+                    screenBackgroundColor={{ backgroundColor: 'white' }}>
+
+                    <View style={{ ...styles.container, marginBottom: 120 }}>
+                        <ProfileScreen />
+                    </View>
+                </TabBar.Item>
+            </TabBar>
+        );
     }
 }
 
@@ -25,7 +65,7 @@ class HomeScreen extends React.Component {
 const mapStateToProps = ({ homeResponse }) => {
 
     return {
-        //loading: homeResponse.loading, payrollsData: homeResponse.payrollsData
+        loading: homeResponse.loading
     }
 }
 

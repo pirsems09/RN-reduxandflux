@@ -4,8 +4,6 @@ const styles = {
         flex: 1,
         backgroundColor: "#fafafa",
         height: '100%',
-        paddingTop:5,
-        paddingBottom:30,
     },
     activityIndicator: {
         flex: 1,

@@ -9,7 +9,7 @@ export default class Splash extends Component {
 
     componentWillMount() {
         setTimeout(() => {
-            Actions.home()
+            Actions.login()
         }, 1000);
     }
 
